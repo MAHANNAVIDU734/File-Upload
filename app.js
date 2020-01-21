@@ -1,7 +1,9 @@
+//initialize require files 
 const express = require('express');
 const multer = require('multer');
 const ejs = require('ejs');
 const path = require('path');
+
 
 const storage = multer.diskStorage({
     destination: './public/uploads/',
@@ -9,7 +11,7 @@ const storage = multer.diskStorage({
        cb(null,file.fieldname + '-' + Date.now() +path.extname(file.originalname));
     }
 });
-
+// uplading functions and required file size
 const uplaod = multer({
     storage: storage,
     limits:{filesize: 1000000},
@@ -17,7 +19,7 @@ const uplaod = multer({
         checkFileType(file,cb);
     }
 }).single('myImage');
-
+//validate file type
 function checkFileType(file, cb){
     const filetypes = /jpeg|jpg|png|gif/;
     
@@ -61,6 +63,7 @@ app.post('/upload', (req,res) => {
     });
 });
 
+//initialize Port
 const PORT = 3000;
 
 
